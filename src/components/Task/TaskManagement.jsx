@@ -91,11 +91,11 @@ const TaskManagement = () => {
             </button>
 
             <DragDropContext onDragEnd={handleDragEnd}>
-                <div className="flex gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     {categories.map((category, index) => (
                         <Droppable key={category} droppableId={String(index)}>
                             {(provided) => (
-                                <div className="w-1/3 bg-gray-100 p-4 rounded shadow" ref={provided.innerRef} {...provided.droppableProps}>
+                                <div className="w-full bg-gray-100 p-4 rounded shadow" ref={provided.innerRef} {...provided.droppableProps}>
                                     <h2 className="text-lg font-semibold mb-3">{category}</h2>
                                     {tasks
                                         .filter((task) => task.category === category)
@@ -188,3 +188,4 @@ const TaskManagement = () => {
 };
 
 export default TaskManagement;
+
