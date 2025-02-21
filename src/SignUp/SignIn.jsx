@@ -2,8 +2,6 @@ import React, { useContext, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-// import signinLottie from '../../assets/Lottile/signin.json'
-// import Lottie from 'lottie-react';
 import AuthContext from '../context/Authcontext';
 import SocialLogin from './SocialLogin';
 
@@ -13,18 +11,14 @@ const SignIn = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-
-
-    const handleSignIn = e => {
+    const handleSignIn = (e) => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
 
-        // signin user
         signInUser(email, password)
-            .then(result => {
+            .then((result) => {
                 const user = result.user;
                 setUser(user);
 
@@ -37,65 +31,71 @@ const SignIn = () => {
                 });
 
                 setTimeout(() => {
-                    navigate(location?.state ? location.state : '/'); 
+                    navigate(location?.state ? location.state : '/');
                 }, 2000);
             })
-            .catch(error => {
+            .catch((error) => {
                 console.log(error);
-            })
-
-    }
+            });
+    };
 
     return (
-        <div className="hero bg-base-100 min-h-screen">
-            <div className="hero-content flex-col lg:flex-row-reverse">
-                {/* <div className="text-center lg:text-left w-96">
-                    <Lottie animationData={signinLottie}></Lottie>
-                </div> */}
-                <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                    <h1 className="mx-auto mt-5 text-5xl font-bold">Sign-In now!</h1>
-                    <form onSubmit={handleSignIn} className="card-body">
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Email</span>
-                            </label>
-                            <input type="email" name='email' placeholder="email" className="input input-bordered" required />
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+                <h1 className="text-3xl font-bold text-gray-800 text-center mb-6">Sign In</h1>
+
+                <form onSubmit={handleSignIn} className="space-y-5">
+                    <div>
+                        <label className="block text-gray-700 font-medium">Email</label>
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            className="w-full border border-gray-300 rounded-lg px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-gray-700 font-medium">Password</label>
+                        <div className="relative">
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                name="password"
+                                placeholder="Enter your password"
+                                className="w-full border border-gray-300 rounded-lg px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                required
+                            />
+                            <button
+                                type="button"
+                                className="absolute inset-y-0 right-3 flex items-center text-gray-600"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? <FaEye /> : <FaEyeSlash />}
+                            </button>
                         </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Password</span>
-                            </label>
-                            <div className="relative">
-                                <input
-                                    type={showPassword ? 'text' : 'password'}
-                                    name='password'
-                                    placeholder="password"
-                                    className="input input-bordered w-full"
-                                    required
-                                />
-                                <button
-                                    type="button"
-                                    className="absolute inset-y-0 right-2 flex items-center text-gray-600"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                >
-                                    {showPassword ? <FaEye /> : <FaEyeSlash />}
-                                </button>
-                            </div>
-                            <label className="label">
-                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                            </label>
+                        <div className="mt-2 text-right">
+                            <a href="#" className="text-sm text-blue-500 hover:underline">Forgot password?</a>
                         </div>
-                        <div className="form-control mt-6">
-                            <button className="btn btn-primary">Login</button>
-                        </div>
-                    </form>
-                    <p className='text-center font-semibold'>
-                        Don’t Have An Account?{' '}
-                        <Link className='text-red-500' to='/register'>
-                            Register
-                        </Link>
-                    </p>
-                    <SocialLogin></SocialLogin>
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition"
+                    >
+                        Login
+                    </button>
+                </form>
+
+                <p className="text-center text-gray-600 mt-4">
+                    Don't have an account?{' '}
+                    <Link to="/register" className="text-blue-500 font-medium hover:underline">
+                        Register
+                    </Link>
+                </p>
+
+                <div className="mt-6">
+                    <SocialLogin />
                 </div>
             </div>
         </div>

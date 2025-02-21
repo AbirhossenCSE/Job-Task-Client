@@ -15,7 +15,7 @@ const TaskManagement = () => {
 
     const fetchTasks = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/tasks");
+            const response = await axios.get("https://job-task-server-chi-gilt.vercel.app/tasks");
             setTasks(response.data);
         } catch (error) {
             console.error("Error fetching tasks:", error);
@@ -33,7 +33,7 @@ const TaskManagement = () => {
         setTasks(updatedTasks);
 
         try {
-            await axios.put(`http://localhost:5000/tasks/${movedTask._id}`, {
+            await axios.put(`https://job-task-server-chi-gilt.vercel.app/tasks/${movedTask._id}`, {
                 category: movedTask.category,
             });
         } catch (error) {
@@ -43,7 +43,7 @@ const TaskManagement = () => {
 
     const deleteTask = async (taskId) => {
         try {
-            await axios.delete(`http://localhost:5000/tasks/${taskId}`);
+            await axios.delete(`https://job-task-server-chi-gilt.vercel.app/tasks/${taskId}`);
             setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskId));
         } catch (error) {
             console.error("Error deleting task:", error);
@@ -51,61 +51,66 @@ const TaskManagement = () => {
     };
 
     return (
-        <div>
+        <div className="min-h-screen bg-base-100 flex flex-col">
             <Navbar />
-            <div className="p-8">
-                <h1 className="text-2xl font-bold mb-4">Task Management</h1>
+
+            <div className="p-6 flex flex-col items-center">
+                <h1 className="text-3xl font-bold mb-6">Task Management</h1>
                 <button
-                    className="bg-green-500 text-white px-4 py-2 rounded mb-4"
+                    className="bg-blue-500 text-white px-5 py-2 rounded-lg shadow hover:bg-blue-600 transition"
                     onClick={() => navigate("/addTask")}
                 >
-                    Add New Task
+                    + Add New Task
                 </button>
 
                 <DragDropContext onDragEnd={handleDragEnd}>
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl mt-6">
                         {categories.map((category, index) => (
                             <Droppable key={category} droppableId={String(index)}>
                                 {(provided) => (
                                     <div
-                                        className="w-full bg-gray-100 p-4 rounded shadow"
+                                        className="bg-base-300 shadow-lg rounded-xl p-4 w-full min-h-[300px]"
                                         ref={provided.innerRef}
                                         {...provided.droppableProps}
                                     >
-                                        <h2 className="text-lg font-semibold mb-3">{category}</h2>
-                                        {tasks
-                                            .filter((task) => task.category === category)
-                                            .map((task, taskIndex) => (
-                                                <Draggable key={task._id} draggableId={String(task._id)} index={taskIndex}>
-                                                    {(provided) => (
-                                                        <div
-                                                            className="bg-white p-3 mb-2 rounded shadow"
-                                                            ref={provided.innerRef}
-                                                            {...provided.draggableProps}
-                                                            {...provided.dragHandleProps}
-                                                        >
-                                                            <h3 className="font-medium">{task.title}</h3>
-                                                            <p className="text-sm">{task.description}</p>
-                                                            <button
-                                                                className="bg-yellow-500 text-white px-2 py-1 rounded mr-2"
-                                                                onClick={() => navigate(`/editTask/${task._id}`)}
+                                        <h2 className="text-lg font-semibold text-gray-700 mb-4">{category}</h2>
+                                        <div className="space-y-3">
+                                            {tasks
+                                                .filter((task) => task.category === category)
+                                                .map((task, taskIndex) => (
+                                                    <Draggable key={task._id} draggableId={String(task._id)} index={taskIndex}>
+                                                        {(provided) => (
+                                                            <div
+                                                                className="bg-gray-50 border-l-4 border-blue-500 p-4 rounded-lg shadow hover:shadow-md transition"
+                                                                ref={provided.innerRef}
+                                                                {...provided.draggableProps}
+                                                                {...provided.dragHandleProps}
                                                             >
-                                                                Edit
-                                                            </button>
-                                                            <button
-                                                                className="bg-red-500 text-white px-2 py-1 rounded"
-                                                                onClick={(e) => {
-                                                                    e.stopPropagation();
-                                                                    deleteTask(task._id);
-                                                                }}
-                                                            >
-                                                                Delete
-                                                            </button>
-                                                        </div>
-                                                    )}
-                                                </Draggable>
-                                            ))}
-                                        {provided.placeholder}
+                                                                <h3 className="text-md font-medium text-gray-800">{task.title}</h3>
+                                                                <p className="text-sm text-gray-600">{task.description}</p>
+                                                                <div className="flex justify-between items-center mt-3">
+                                                                    <button
+                                                                        className="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600 transition"
+                                                                        onClick={() => navigate(`/editTask/${task._id}`)}
+                                                                    >
+                                                                        Edit
+                                                                    </button>
+                                                                    <button
+                                                                        className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition"
+                                                                        onClick={(e) => {
+                                                                            e.stopPropagation();
+                                                                            deleteTask(task._id);
+                                                                        }}
+                                                                    >
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </Draggable>
+                                                ))}
+                                            {provided.placeholder}
+                                        </div>
                                     </div>
                                 )}
                             </Droppable>
@@ -118,4 +123,3 @@ const TaskManagement = () => {
 };
 
 export default TaskManagement;
-

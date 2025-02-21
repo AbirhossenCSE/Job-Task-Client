@@ -16,7 +16,7 @@ const AddTask = () => {
         }
 
         try {
-            await axios.post("http://localhost:5000/tasks", {
+            await axios.post("https://job-task-server-chi-gilt.vercel.app/tasks", {
                 title: newTask.title,
                 description: newTask.description,
                 category: newTask.category,
@@ -31,51 +31,63 @@ const AddTask = () => {
     };
 
     return (
-        <div>
-            <Navbar></Navbar>
+        <div className="min-h-screen bg-base-100 flex flex-col">
+            <Navbar />
 
-            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
-                <h1 className="text-2xl font-bold mb-4">Add New Task</h1>
-                <div className="bg-white p-6 rounded-lg w-96 shadow-lg">
-                    <input
-                        type="text"
-                        placeholder="Title (Max 50 chars)"
-                        value={newTask.title}
-                        onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-                        maxLength={50}
-                        className="w-full p-2 border rounded mb-3"
-                    />
-                    <textarea
-                        placeholder="Description (Optional, Max 200 chars)"
-                        value={newTask.description}
-                        onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
-                        maxLength={200}
-                        className="w-full p-2 border rounded mb-3"
-                    />
+            <div className="flex flex-col items-center justify-center flex-grow p-6">
+                <div className="bg-base-300 shadow-lg rounded-2xl p-8 w-full max-w-lg">
+                    <h1 className="text-3xl font-bold  text-center mb-6">Add New Task</h1>
 
-                    {/* Category Selection */}
-                    <label className="block text-gray-700 mb-1">Select Category</label>
-                    <select
-                        value={newTask.category}
-                        onChange={(e) => setNewTask({ ...newTask, category: e.target.value })}
-                        className="w-full p-2 border rounded mb-3"
-                    >
-                        {categories.map((category) => (
-                            <option key={category} value={category}>
-                                {category}
-                            </option>
-                        ))}
-                    </select>
+                    <div className="space-y-4">
+                        <div>
+                            <label className="block  font-medium mb-1">Title</label>
+                            <input
+                                type="text"
+                                placeholder="Enter task title..."
+                                value={newTask.title}
+                                onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
+                                maxLength={50}
+                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                            />
+                        </div>
 
-                    <div className="flex justify-between">
+                        <div>
+                            <label className="block text-gray-700 font-medium mb-1">Description</label>
+                            <textarea
+                                placeholder="Enter task description (optional)..."
+                                value={newTask.description}
+                                onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
+                                maxLength={200}
+                                rows="3"
+                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-gray-700 font-medium mb-1">Category</label>
+                            <select
+                                value={newTask.category}
+                                onChange={(e) => setNewTask({ ...newTask, category: e.target.value })}
+                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                            >
+                                {categories.map((category) => (
+                                    <option key={category} value={category}>
+                                        {category}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="flex justify-between items-center mt-6">
                         <button
-                            className="bg-gray-400 text-white px-4 py-2 rounded"
+                            className="w-1/3 py-2 px-4 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-200"
                             onClick={() => navigate("/tasks")}
                         >
                             Cancel
                         </button>
                         <button
-                            className="bg-blue-500 text-white px-4 py-2 rounded"
+                            className="w-1/3 py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-200"
                             onClick={addTask}
                         >
                             Add Task

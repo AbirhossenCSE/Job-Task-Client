@@ -52,7 +52,7 @@ const Register = () => {
 
     // Function to save user to the database
     const saveUserToDatabase = (uid, email, displayName) => {
-        fetch("http://localhost:5000/users", {
+        fetch("https://job-task-server-chi-gilt.vercel.app/users", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -66,8 +66,8 @@ const Register = () => {
 
     return (
         <div className="flex justify-center items-center min-h-screen">
-            <div className="bg-white p-8 rounded-lg shadow-md w-96">
-                <h2 className="text-2xl font-semibold text-center">Register</h2>
+            <div className="bg-base-100 p-8 rounded-lg shadow-md w-96">
+                <h2 className="text-3xl font-bold text-center">Register Now</h2>
                 {error && <p className="text-red-500 text-center">{error}</p>}
                 <form onSubmit={handleRegister} className="mt-4">
                     <div>
@@ -88,7 +88,7 @@ const Register = () => {
                 </form>
                 <p className="mt-3 text-center">
                     Already have an account?{" "}
-                    <Link to="/login" className="text-blue-500">Login</Link>
+                    <Link to="/signin" className="text-blue-500">Login</Link>
                 </p>
                 <SocialLogin></SocialLogin>
             </div>

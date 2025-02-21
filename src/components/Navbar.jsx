@@ -1,11 +1,15 @@
-import { useContext } from "react";
+
+import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import AuthContext from "../context/Authcontext";
+import { FaMoon } from "react-icons/fa";
+import { FiSun } from "react-icons/fi";
 
 
 const Navbar = () => {
     const { user, signOutUser } = useContext(AuthContext);
     const navigate = useNavigate();
+    const [theme, setTheme] = useState('light');
 
     const handleSignOut = () => {
         signOutUser()
@@ -17,9 +21,16 @@ const Navbar = () => {
             });
     };
 
+    // Toggle dark/light mode
+    const toggleTheme = () => {
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+        document.documentElement.setAttribute('data-theme', newTheme);
+    };
+
     const links = (
         <>
-            <li><NavLink to='/'>Task</NavLink></li>
+            <li><NavLink to='/'>Home</NavLink></li>
             <li><NavLink to='/addTask'>Add Task</NavLink></li>
             <li><NavLink to='/tasks'>Task Management</NavLink></li>
 
@@ -27,7 +38,7 @@ const Navbar = () => {
     );
     return (
         <div>
-            <div className="navbar bg-base-100">
+            <div className="navbar bg-base-300">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -50,14 +61,23 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost font-bold text-2xl">TaskManager</a>
+                    <a className="btn btn-ghost font-bold text-2xl ml-20">TaskManager</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         {links}
                     </ul>
                 </div>
-                <div className="navbar-end">
+                <div className="navbar-end mr-20">
+                    {/* Theme Toggle */}
+                    <button
+                        onClick={toggleTheme}
+                        className="btn btn-ghost mr-2"
+                        title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+                    >
+                        {theme === 'light' ? <FaMoon /> : <FiSun />}
+                    </button>
+
                     {user ? (
                         <button onClick={handleSignOut} className="btn">
                             Sign Out

@@ -36,7 +36,7 @@ const SocialLogin = () => {
 
     // Function to save user to the database
     const saveUserToDatabase = (uid, email, displayName) => {
-        fetch("http://localhost:5000/users", {
+        fetch("https://job-task-server-chi-gilt.vercel.app/users", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
