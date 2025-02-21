@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 // import auth from "../../firebase.config";
 import Swal from "sweetalert2";
 import auth from "../firebase/firebase.init";
+import SocialLogin from "./SocialLogin";
 
 const Register = () => {
     const [error, setError] = useState("");
@@ -89,6 +90,7 @@ const Register = () => {
                     Already have an account?{" "}
                     <Link to="/login" className="text-blue-500">Login</Link>
                 </p>
+                <SocialLogin></SocialLogin>
             </div>
         </div>
     );
