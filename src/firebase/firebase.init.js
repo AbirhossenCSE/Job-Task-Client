@@ -21,3 +21,10 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 export default auth;
+
+// VITE_apiKey=AIzaSyAUiKS6_QWsDNktTL9cuO6Xx1GTHf5NukY
+// VITE_authDomain=restaurant-management-b98e1.firebaseapp.com
+// VITE_projectId=restaurant-management-b98e1
+// VITE_storageBucket=restaurant-management-b98e1.firebasestorage.app
+// VITE_messagingSenderId=638741927453
+// VITE_appId=1:638741927453:web:37016822b88c577a5958f4

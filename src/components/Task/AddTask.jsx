@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 const AddTask = () => {
     const navigate = useNavigate();
@@ -52,7 +53,7 @@ const AddTask = () => {
                         </div>
 
                         <div>
-                            <label className="block text-gray-700 font-medium mb-1">Description</label>
+                            <label className="block font-medium mb-1">Description</label>
                             <textarea
                                 placeholder="Enter task description (optional)..."
                                 value={newTask.description}
@@ -64,7 +65,7 @@ const AddTask = () => {
                         </div>
 
                         <div>
-                            <label className="block text-gray-700 font-medium mb-1">Category</label>
+                            <label className="block  font-medium mb-1">Category</label>
                             <select
                                 value={newTask.category}
                                 onChange={(e) => setNewTask({ ...newTask, category: e.target.value })}
@@ -81,7 +82,7 @@ const AddTask = () => {
 
                     <div className="flex justify-between items-center mt-6">
                         <button
-                            className="w-1/3 py-2 px-4 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-200"
+                            className="w-1/3 py-2 px-4 text-gray-800 bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-200"
                             onClick={() => navigate("/tasks")}
                         >
                             Cancel
@@ -95,6 +96,7 @@ const AddTask = () => {
                     </div>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 };

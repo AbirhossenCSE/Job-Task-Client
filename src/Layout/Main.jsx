@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
 import { FaTasks, FaCheckCircle, FaChartLine } from "react-icons/fa";
+import Footer from "../components/Footer";
 
 const Main = () => {
     return (
@@ -59,10 +60,8 @@ const Main = () => {
                 </div>
             </section>
 
-            {/* Footer */}
-            <footer className="bg-gray-900 text-white text-center py-6">
-                <p>&copy; {new Date().getFullYear()} Task Management System. All rights reserved.</p>
-            </footer>
+           <Footer></Footer>
+            
         </div>
     );
 };

@@ -3,6 +3,7 @@ import axios from "axios";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 const TaskManagement = () => {
     const [tasks, setTasks] = useState([]);
@@ -51,10 +52,10 @@ const TaskManagement = () => {
     };
 
     return (
-        <div className="min-h-screen bg-base-100 flex flex-col">
+        <div className="flex flex-col min-h-screen bg-base-100">
             <Navbar />
 
-            <div className="p-6 flex flex-col items-center">
+            <main className="flex-grow p-6 flex flex-col items-center">
                 <h1 className="text-3xl font-bold mb-6">Task Management</h1>
                 <button
                     className="bg-blue-500 text-white px-5 py-2 rounded-lg shadow hover:bg-blue-600 transition"
@@ -73,7 +74,7 @@ const TaskManagement = () => {
                                         ref={provided.innerRef}
                                         {...provided.droppableProps}
                                     >
-                                        <h2 className="text-lg font-semibold text-gray-700 mb-4">{category}</h2>
+                                        <h2 className="text-xl font-semibold mx-6 mb-4">{category}</h2>
                                         <div className="space-y-3">
                                             {tasks
                                                 .filter((task) => task.category === category)
@@ -86,8 +87,8 @@ const TaskManagement = () => {
                                                                 {...provided.draggableProps}
                                                                 {...provided.dragHandleProps}
                                                             >
-                                                                <h3 className="text-md font-medium text-gray-800">{task.title}</h3>
-                                                                <p className="text-sm text-gray-600">{task.description}</p>
+                                                                <h3 className="text-lg font-bold text-gray-800">{task.title}</h3>
+                                                                <p className="text-sm text-gray-700 text-justify">{task.description}</p>
                                                                 <div className="flex justify-between items-center mt-3">
                                                                     <button
                                                                         className="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600 transition"
@@ -117,7 +118,9 @@ const TaskManagement = () => {
                         ))}
                     </div>
                 </DragDropContext>
-            </div>
+            </main>
+
+            <Footer />
         </div>
     );
 };
