@@ -5,6 +5,7 @@ import Main from "../Layout/Main";
 import SignIn from "../SignUp/SignIn";
 import Register from "../SignUp/Register";
 import TaskManagement from "../components/Task/TaskManagement";
+import AddTask from "../components/Task/AddTask";
 
 
   export const router = createBrowserRouter([
@@ -14,7 +15,11 @@ import TaskManagement from "../components/Task/TaskManagement";
         element: <Main></Main>
     },
     {
-        path: '/taskManagement',
+        path: '/addTask',
+        element: <AddTask></AddTask>
+    },
+    {
+        path: '/tasks',
         element: <TaskManagement></TaskManagement>
     },
     {

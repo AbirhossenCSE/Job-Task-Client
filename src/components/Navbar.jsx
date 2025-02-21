@@ -20,7 +20,8 @@ const Navbar = () => {
     const links = (
         <>
             <li><NavLink to='/'>Task</NavLink></li>
-            <li><NavLink to='/taskManagement'>Task Management</NavLink></li>
+            <li><NavLink to='/addTask'>Add Task</NavLink></li>
+            <li><NavLink to='/tasks'>Task Management</NavLink></li>
 
         </>
     );
