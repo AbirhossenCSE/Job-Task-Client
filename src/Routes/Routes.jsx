@@ -7,6 +7,7 @@ import Register from "../SignUp/Register";
 import TaskManagement from "../components/Task/TaskManagement";
 import AddTask from "../components/Task/AddTask";
 import EditTask from "../components/Task/EditTask";
+import PrivateRoute from "./PrivateRoute";
 
 
   export const router = createBrowserRouter([
@@ -17,15 +18,15 @@ import EditTask from "../components/Task/EditTask";
     },
     {
         path: '/addTask',
-        element: <AddTask></AddTask>
+        element: <PrivateRoute><AddTask></AddTask></PrivateRoute>
     },
     {
         path: '/tasks',
-        element: <TaskManagement></TaskManagement>
+        element: <PrivateRoute><TaskManagement></TaskManagement></PrivateRoute>
     },
     {
         path: '/editTask/:id',
-        element: <EditTask></EditTask>
+        element: <PrivateRoute><EditTask></EditTask></PrivateRoute>
     },
     {
         path: '/register',
