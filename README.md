@@ -3,7 +3,7 @@
 A simple and efficient Task Management Application built with React, Vite, Firebase authentication, and drag-and-drop functionality for seamless task organization.
 
 ## 🚀 Live Demo
-[Live Link](#) (Replace with your deployed link)
+[Live Link](#) (https://simple-firebase-df58a.web.app/)
 
 ## 📌 Features
 - Add, edit, delete, and reorder tasks.
@@ -38,7 +38,7 @@ A simple and efficient Task Management Application built with React, Vite, Fireb
 ## 🛠 Installation & Setup
 1. **Clone the repository**
    ```sh
-   git clone https://github.com/your-username/task-management-app.git
+   git clone https://github.com/AbirhossenCSE/Job-Task-Client
    cd task-management-app
    ```
 2. **Install dependencies**
