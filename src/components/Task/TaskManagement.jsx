@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
@@ -24,23 +25,33 @@ const TaskManagement = () => {
     };
 
     const handleDragEnd = async (result) => {
-        if (!result.destination) return;
+        if (!result.destination) return; // If dropped outside, do nothing.
 
-        const updatedTasks = [...tasks];
-        const [movedTask] = updatedTasks.splice(result.source.index, 1);
-        movedTask.category = categories[result.destination.droppableId];
-        updatedTasks.splice(result.destination.index, 0, movedTask);
+        // Get task ID and new category
+        const taskId = result.draggableId;
+        const newCategory = categories[parseInt(result.destination.droppableId)];
 
-        setTasks(updatedTasks);
+        // console.log("Updating task with ID:", taskId, "New Category:", newCategory);
 
         try {
-            await axios.put(`https://job-task-server-chi-gilt.vercel.app/tasks/${movedTask._id}`, {
-                category: movedTask.category,
+            const response = await axios.put(`https://job-task-server-chi-gilt.vercel.app/tasks/${taskId}`, {
+                category: newCategory,
             });
+
+            // console.log("Task updated successfully:", response.data);
+
+            // Update local state to reflect the change
+            setTasks((prevTasks) =>
+                prevTasks.map((task) =>
+                    task._id === taskId ? { ...task, category: newCategory } : task
+                )
+            );
+
         } catch (error) {
             console.error("Error updating task category:", error);
         }
     };
+
 
     const deleteTask = async (taskId) => {
         try {
@@ -126,3 +137,4 @@ const TaskManagement = () => {
 };
 
 export default TaskManagement;
+
