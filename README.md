@@ -3,7 +3,7 @@
 A simple and efficient Task Management Application built with React, Vite, Firebase authentication, and drag-and-drop functionality for seamless task organization.
 
 ## 🚀 Live Demo
-[Live Link](#) (https://simple-firebase-df58a.web.app/)
+[Live Link](https://simple-firebase-df58a.web.app/)
 
 ## 📌 Features
 - Add, edit, delete, and reorder tasks.
